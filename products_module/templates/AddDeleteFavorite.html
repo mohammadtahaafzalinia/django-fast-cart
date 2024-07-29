@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    {% if request.user.is_superuser == False %}
+        <script>location.href = '{% url 'main_product' %}'</script>
+    {% endif %}
+</body>
+</html>

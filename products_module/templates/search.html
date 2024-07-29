@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title_page %}
+	جستجو
+{% endblock %}
+{% block continer_page %}
+	    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>جستجو</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">جستو</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Search Bar Section Start -->
+    <section class="search-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-8 mx-auto">
+                    <div class="title d-block text-center">
+                        <h2>جستجو در محصولات</h2>
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="/static/Front/svg/leaf.svg#leaf"></use>
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="search-box">
+                        <div class="input-group">
+                                <input type="text" class="form-control" name="search" id="input-search1"  placeholder="نام محصول را تایپ کنید ..."
+                                    aria-label="Example text with button addon" value="">
+                                <button class="btn theme-bg-color text-white m-0" type="button"
+                                    id="button-search1" onclick="SearchJS()">بگرد</button>
+                            <script>
+                                function SearchJS() {
+                                    const x = $('#input-search1').val()
+                                    location.href = '{% url 'search_product' %}?search=' + x
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Search Bar Section End -->
+    
+    <!-- Product Section Start -->
+    <section class="section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-product product-wrapper">
+                    {% if not_found %}
+                    	<h3 style="margin-left: 30px">محصولی یافت نشد</h3>
+                    {% else %}
+                        {% for product in products %}
+                            <div>
+                                <div class="product-box-3 wow fadeInUp">
+                                    <div class="product-header">
+                                        <div class="product-image">
+                                            <a href="{% url 'ditail_product' product.slug %}">
+                                                <img src="{{ product.image.url }}"
+                                                    class="img-fluid blur-up lazyload" alt="">
+                                            </a>
+
+                                            <ul class="product-option">
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                                    <a href="{% url 'ditail_product' product.slug %}" data-bs-toggle="modal"
+                                                        data-bs-target="#view">
+                                                        <i data-feather="eye"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                                    <a href="{% url 'compare' %}?slug={{ product.slug }}">
+                                                        <i data-feather="refresh-cw"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به لیست علاقه‌مندی">
+                                                        <a id="favorite" onclick="Add({{ product.id }})" class="notifi-wishlist">
+                                                            <i onclick="Like({{ product.id }})" id="iconR-{{ product.id }}" class="fa-regular fa-heart" style="display: {% if not product.id in product_id %}block{% else %}none{% endif %};"></i>
+                                                            <i onclick="Like({{ product.id }})" id="iconS-{{ product.id }}" class="fa-solid fa-heart" style="display:{% if product.id in product_id %}block{% else %}none{% endif %};"></i>
+                                                        </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-footer">
+                                        <div class="product-detail">
+                                            <span class="span-name">{{ product.category.title }}</span>
+                                            <a href="{% url 'ditail_product' product.slug %}">
+                                                <h5 class="name">{{ product.product_name }}</h5>
+                                            </a>
+                                            <div class="product-rating mt-2">
+                                                <ul class="rating">
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                </ul>
+                                                <span>({{ product.score }})</span>
+                                            </div>
+                                            <h6 class="unit">{{ product.weight }}</h6>
+                                            <h5 class="price"><span class="theme-color">{{ product.price_after_discount }} تومان</span> <del>{{ product.price }}</del>
+                                            </h5>
+                                           <div class="add-to-cart-box bg-white">
+                                                <button class="btn btn-add-cart addcart-button" onclick="AddProductBasketBuy({{ product.id }})">افزودن
+                                                    <span class="add-icon bg-light-gray"> <i class="fa-solid fa-plus"></i> </span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+{% endblock %}

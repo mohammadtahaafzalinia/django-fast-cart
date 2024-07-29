@@ -1,0 +1,329 @@
+{% load thumbnail %}
+<header class="pb-md-4 pb-0">
+    <div class="header-top">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-3 d-xxl-block d-none">
+                    <div class="top-left-header">
+                        <i class="iconly-Location icli text-white"></i>
+                        <span class="text-white">تهران - برج میلاد</span>
+                    </div>
+                </div>
+
+                <div class="col-xxl-6 col-lg-9 d-lg-block d-none">
+                    <div class="header-offer">
+                        <div class="notification-slider">
+                            <div>
+                                <div class="timer-notification">
+                                    <h6><strong class="me-1">به فست کارت خوش آمدید !</strong>خرید لذت بخشی را آرزو
+                                        میکنیم<strong class="ms-1">کد تخفیف جدید: Fast024</strong></h6>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="timer-notification">
+                                    <h6>پیشنهادات ویژه را فراموش نکنید !
+                                        <a href="{% url 'main_product' %}" class="text-white">خرید آنلاین</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-nav top-header sticky-header">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="navbar-top">
+                        <button class="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+                                <span class="navbar-toggler-icon">
+                                <i class="fa-solid fa-bars"></i>
+                                </span>
+                        </button>
+                        <a href="{% url 'home' %}" class="web-logo nav-logo">
+                            <img src="{{ sites.icon.url }}" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+
+                        <div class="middle-box">
+                            {#                                <div class="location-box">#}
+                            {#                                    <button class="btn location-button" data-bs-toggle="modal"#}
+                            {#                                        data-bs-target="#locationModal">#}
+                            {#                                        <span class="location-arrow">#}
+                            {#                                            <i data-feather="map-pin"></i>#}
+                            {#                                        </span>#}
+                            {#                                        <span class="locat-name">مکان شما</span>#}
+                            {#                                        <i class="fa-solid fa-angle-down"></i>#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+
+                            <div class="search-box">
+                                <div class="input-group">
+                                    <input type="search" class="form-control" id="input-search1" value=""
+                                           placeholder="جستجو محصول ..."
+                                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <button class="btn" type="button" id="button" onclick="SearchJS()">
+                                        <i data-feather="search"></i>
+                                    </button>
+                                    <script>
+                                        function SearchJS() {
+                                            const x = $('#input-search1').val()
+                                            location.href = '{% url 'search_product' %}?search=' + x
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rightside-box">
+                            <div class="search-full">
+                                <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i data-feather="search" class="font-light"></i>
+                                        </span>
+                                    <input type="text" class="form-control search-type" placeholder="جستجو ...">
+                                    <span class="input-group-text close-search">
+                                            <i data-feather="x" class="font-light"></i>
+                                        </span>
+                                </div>
+                            </div>
+                            <ul class="right-side-menu">
+                                <li class="right-side">
+                                    <div class="delivery-login-box">
+                                        <div class="delivery-icon">
+                                            <div class="search-box">
+                                                <i data-feather="search"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="right-side">
+                                    <a href="{% url 'contact-us' %}" class="delivery-login-box">
+                                        <div class="delivery-icon">
+                                            <i data-feather="phone-call"></i>
+                                        </div>
+                                        <div class="delivery-detail">
+                                            <h6>پشیتبانی 24 ساعته</h6>
+                                            <h5>0936000000</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="right-side">
+                                    <a href="{% url 'favorites' %}" class="btn p-0 position-relative header-wishlist">
+                                        <i data-feather="heart"></i>
+                                    </a>
+                                </li>
+                                {% if context %}
+                                    <li class="right-side">
+                                        <div class="onhover-dropdown header-badge">
+                                            <button type="button" class="btn p-0 position-relative header-wishlist">
+                                                <i data-feather="shopping-cart"></i>
+                                                <span class="position-absolute top-0 start-100 translate-middle badge">{{ baskets.count }}
+                                                    <span class="visually-hidden">پیام های خوانده نشده</span>
+                                                </span>
+                                            </button>
+
+                                            <div class="onhover-div">
+                                                <ul class="cart-list">
+                                                    {% for basket in baskets %}
+                                                        <li class="product-box-contain">
+                                                            <div class="drop-cart">
+                                                                <a href="{% url 'ditail_product' basket.product.slug %}"
+                                                                   class="drop-image">
+                                                                    <img src="{{ basket.product.image.url }}"
+                                                                         class="blur-up lazyload" alt="">
+                                                                </a>
+
+                                                                <div class="drop-contain">
+                                                                    <a href="{% url 'ditail_product' basket.product.slug %}">
+                                                                        <h5>{{ basket.product.product_name }}</h5>
+                                                                    </a>
+                                                                    <h6>
+                                                                        <span>{{ basket.number_product }} x</span> {{ basket.total }}
+                                                                        تومان</h6>
+                                                                    <button class="close-button close_button">
+                                                                        <i class="fa-solid fa-xmark"
+                                                                           onclick="DeleteBasketBuy({{ basket.id }})"></i>
+                                                                    </button>
+                                                                    <script>
+                                                                        function DeleteBasketBuy(basket) {
+                                                                            $.get('/cart/delete-basket/', {
+                                                                                'basket_id': basket,
+                                                                            }).then(
+                                                                                res => {
+                                                                                    return res
+                                                                                }
+                                                                            )
+                                                                        }
+                                                                    </script>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+
+
+                                                </ul>
+                                                <div class="price-box">
+                                                    <h5>جمع کل :</h5>
+                                                    <h4 class="theme-color fw-bold">{{ carts.total_sum }} تومان</h4>
+                                                </div>
+
+                                                <div class="button-group">
+                                                    <a href="{% url 'Cart' %}" class="btn btn-sm cart-button">نمایش سبد
+                                                        خرید</a>
+                                                    <a href="{% url 'order-success' %}" class="btn btn-sm cart-button theme-bg-color
+                                                    text-white">پرداخت</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endif %}
+
+                                <li class="right-side onhover-dropdown">
+                                    <div class="delivery-login-box">
+                                        <div class="delivery-icon">
+                                            <i data-feather="user"></i>
+                                        </div>
+                                    </div>
+                                    {% if userauth == False %}
+                                        <div class="onhover-div onhover-div-login">
+                                            <ul class="user-box-name">
+
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <a href="{% url 'login_acount' %}">ورود</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="{% url 'sign-up' %}">ثبت نام</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="{% url 'forget_pass' %}">فراموشی رمز عبور</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        <div class="onhover-div onhover-div-login">
+                                            <ul class="user-box-name">
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <a href="{% url 'user-dashboard' %}">داشبورد</a>
+                                                </li>
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <a onclick="Privacy('True')">خروج از حساب</a>
+                                                </li>
+                                                <script>
+                                                    function Privacy(logout) {
+                                                        $.get('/user/deleteAccount/', {
+                                                            'Logout': logout,
+                                                        }).then(
+                                                            res => {
+                                                                location.reload()
+                                                                return res
+                                                            }
+                                                        )
+
+                                                    }
+                                                </script>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="header-nav">
+                    <div class="header-nav-left">
+                        <button class="dropdown-category">
+                            <i data-feather="align-left"></i>
+                            <span>دسته بندی ها</span>
+                        </button>
+
+                        <div class="category-dropdown">
+                            <div class="category-title">
+                                <h5>دسته بندی</h5>
+                                <button type="button" class="btn p-0 close-button text-content">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+
+                            <ul class="category-list">
+                                {% for category in categorys %}
+                                    <li class="onhover-category-list">
+                                        <a href="{% url 'main_product' %}?category={{ category.id }}"
+                                           class="category-name">
+                                            <img src="{{ category.image_category.url }}" alt="">
+                                            <h6>{{ category.title }}</h6>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="header-nav-middle">
+                        <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                            <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                                <div class="offcanvas-header navbar-shadow">
+                                    <h5>منو</h5>
+                                    <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-2  ps-xl-2 ps-0"
+                                               href="{% url 'home' %}">خانه</a>
+
+
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-2" href="{% url 'main_product' %}">فروشگاه</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-2" href="{% url 'blog-grid' %}"
+                                            >وبلاگ</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-2" href="{% url 'about-us' %}">درباره ما</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-2" href="{% url 'contact-us' %}">تماس با ما</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-nav-right">
+                        <button class="btn deal-button" data-bs-toggle="modal" data-bs-target="#deal-box">
+                            <i data-feather="zap"></i>
+                            <span>پرفروش ترین ها</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

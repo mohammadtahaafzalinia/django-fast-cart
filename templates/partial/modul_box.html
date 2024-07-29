@@ -1,0 +1,40 @@
+<div class="modal fade theme-modal deal-modal" id="deal-box" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title w-100" id="deal_today">پرفروش ترین های امروز</h5>
+                    <p class="mt-1 text-content">محصولات پیشنهادی برای شما</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="deal-offer-box">
+                    <ul class="deal-offer-list">
+                        {% for product in products %}
+                            
+                        <li class="list-{% if product.proposal %}1{% else %}2{% endif %} ">
+                            <div class="deal-offer-contain">
+                                <a href="{% url 'main_product' %}" class="deal-image">
+                                    <img src="{{ product.image.url }}" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="{% url 'main_product' %}" class="deal-contain">
+                                    <h5>{{ product.product_name }}</h5>
+                                    <h6>{{ product.price_after_discount }} تومان <del>{{ product.price }}</del> <span>{{ product.weight }}</span></h6>
+                                </a>
+                            </div>
+                        </li>                        	
+                        {% endfor %}
+                        
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

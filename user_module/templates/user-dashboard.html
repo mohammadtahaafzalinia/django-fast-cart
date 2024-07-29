@@ -1,0 +1,885 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load poll_extras %}
+{% block title_page %}
+    داشبورد کاربر
+{% endblock %}
+{% block continer_page %}
+
+
+
+
+    <!-- User Dashboard Section Start -->
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-3 col-lg-4">
+                    <div class="dashboard-left-sidebar">
+                        <div class="close-button d-flex d-lg-none">
+                            <button class="close-sidebar">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="profile-box">
+                            <div class="cover-image">
+                                <img src="/static/Front/images/inner-page/cover-img.jpg"
+                                     class="img-fluid blur-up lazyload"
+                                     alt="">
+                            </div>
+
+                            <div class="profile-contain">
+                                <div class="profile-image">
+                                    <div class="flex position-relative justify-content-center align-items-center">
+                                        {% if not user.avatar %}
+                                            <img src="/static/Front/images/download.png"
+                                                 class="blur-up update_img lazyload" alt="">
+                                        {% elif user.avatar %}
+                                            {% thumbnail user.avatar "500x500" quality=50 crop='center' as im %}
+                                                <img src="{{ im.url }}"  class="blur-up update_img lazyload" alt="">
+                                            {% endthumbnail %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="profile-name">
+                                    <h3>{{ user.username }}</h3>
+                                    <h6 class="text-content">{{ user.email }}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-dashboard" type="button" role="tab"
+                                        aria-controls="pills-dashboard" aria-selected="true"><i data-feather="home"></i>
+                                    داشبورد
+                                </button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-order-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-order" type="button" role="tab"
+                                        aria-controls="pills-order"
+                                        aria-selected="false"><i data-feather="shopping-bag"></i>سفارشات
+                                </button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-wishlist-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-wishlist" type="button" role="tab"
+                                        aria-controls="pills-wishlist" aria-selected="false"><i
+                                        data-feather="heart"></i>
+                                    علاقه‌مندی
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-profile" type="button" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false"><i data-feather="user"></i>
+                                    پروفایل
+                                </button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-security-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-security" type="button" role="tab"
+                                        aria-controls="pills-security" aria-selected="false"><i
+                                        data-feather="shield"></i>
+                                    حریم خصوصی
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xxl-9 col-lg-8">
+                    <button class="btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4 d-lg-none">نمایش
+                        منو
+                    </button>
+                    <div class="dashboard-right-sidebar">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                                 aria-labelledby="pills-dashboard-tab">
+                                <div class="dashboard-home">
+                                    <div class="title">
+                                        <h2>داشبورد من</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="/static/Front/svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="dashboard-user-name">
+                                        <h6 class="text-content">سلام, <b class="text-title">{{ user.username }}</b>
+                                        </h6>
+                                        <p class="text-content">{{ site.user_description }}</p>
+                                    </div>
+
+                                    <div class="total-box">
+                                        <div class="row g-sm-4 g-3">
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="/static/Front/images/svg/order.svg"
+                                                         class="img-1 blur-up lazyload" alt="">
+                                                    <img src="/static/Front/images/svg/order.svg"
+                                                         class="blur-up lazyload"
+                                                         alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>مجموع سفارشات</h5>
+                                                        <h3>{{ cart_total_count }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="/static/Front/images/svg/pending.svg"
+                                                         class="img-1 blur-up lazyload" alt="">
+                                                    <img src="/static/Front/images/svg/pending.svg"
+                                                         class="blur-up lazyload"
+                                                         alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>سفارشات در انتظار</h5>
+                                                        <h3>{{ carts_count }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="/static/Front/images/svg/wishlist.svg"
+                                                         class="img-1 blur-up lazyload" alt="">
+                                                    <img src="/static/Front/images/svg/wishlist.svg"
+                                                         class="blur-up lazyload" alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>مجموع علاقه‌مندی ها</h5>
+                                                        <h3>{{ favorite_count }}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dashboard-title">
+                                        <h3>اطلاعات حساب کاربری</h3>
+                                    </div>
+
+                                    <div class="row g-4">
+                                        <div class="col-xxl-6">
+                                            <div class="dashboard-contant-title">
+                                                <h4>اطلاعات اولیه <a href="javascript:void(0)"
+                                                                     data-bs-toggle="modal"
+                                                                     data-bs-target="#editProfile">ویرایش</a>
+                                                </h4>
+                                            </div>
+                                            <div class="dashboard-detail">
+                                                <h6 class="text-content">{{ user.username }}</h6>
+                                                <h6 class="text-content">{{ user.email }}</h6>
+                                                <a href="{% url 'reset_password' %}">تغییر رمز عبور</a>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-xxl-6">
+                                            <div class="dashboard-contant-title">
+                                                <h4>آدرس شما <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                data-bs-target="#editProfile">ویرایش</a></h4>
+                                            </div>
+
+                                            <div class="row g-4">
+
+
+                                                <div class="col-xxl-6">
+                                                    <div class="dashboard-detail">
+                                                        <h6 class="text-content">آدرس منزل</h6>
+                                                        <h6 class="text-content">{{ user.address }}</h6>
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                           data-bs-target="#editProfile">ویرایش آدرس</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="pills-wishlist" role="tabpanel"
+                                 aria-labelledby="pills-wishlist-tab">
+                                <div class="dashboard-wishlist">
+                                    <div class="title">
+                                        <h2>لیست علاقه‌مندی من</h2>
+                                        <p>برای دیدن کامل لیست علاقه مندی <a style="color: #0a58ca;"
+                                                                             href="{% url 'favorites' %}">اینجا</a> کلیک
+                                            کنید</p>
+                                        <span class="title-leaf title-leaf-gray">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="/static/Front/svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="row g-sm-4 g-3">
+                                        {% for favorite in favorites %}
+                                            <div class="col-xxl-3 col-lg-6 col-md-4 col-sm-6"
+                                                 id="cart{{ favorite.product.id }}">
+                                                <div class="product-box-3 theme-bg-white h-100">
+                                                    <div class="product-header">
+                                                        <div class="product-image">
+                                                            <a href="{% url 'ditail_product' favorite.product.slug %}">
+                                                                {% thumbnail favorite.product.image '148x147' crop='center' quality=50 as im %}
+                                                                    <img src="{{ im.url }}"
+                                                                         class="img-fluid blur-up lazyload" alt="">
+                                                                {% endthumbnail %}
+
+                                                            </a>
+
+                                                            <div class="product-header-top">
+                                                                <button onclick="Add({{ favorite.product.id }}),Delete({{ favorite.product.id }})"
+                                                                        class="btn wishlist-button close_button">
+                                                                    <i data-feather="x"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product-footer">
+                                                        <div class="product-detail">
+                                                            <span class="span-name">{{ favorite.product.category.title }}</span>
+                                                            <a href="{% url 'ditail_product' favorite.product.slug %}">
+                                                                <h5 class="name">{{ favorite.product.product_name }}</h5>
+                                                            </a>
+                                                            <p class="text-content mt-1 mb-2 product-content">{{ favorite.product.short_description }}</p>
+                                                            <h6 class="unit mt-1">{{ favorite.product.weight }}</h6>
+                                                            <h5 class="price">
+                                                                <span class="theme-color">تومان{{ favorite.product.price_after_discount }}</span>
+                                                                <del>{{ favorite.product.price }}</del>
+                                                            </h5>
+                                                            <div class="add-to-cart-box mt-2">
+                                                                <button class="btn btn-add-cart addcart-button">افزودن
+                                                                    <span class="add-icon bg-light-gray"> <i
+                                                                            class="fa-solid fa-plus"></i> </span>
+                                                                </button>
+                                                                <div class="cart_qty qty-box">
+                                                                    <div class="input-group">
+                                                                        <button type="button" class="qty-left-minus"
+                                                                                data-type="minus" data-field="">
+                                                                            <i class="fa fa-minus"
+                                                                               aria-hidden="true"></i>
+                                                                        </button>
+                                                                        <input class="form-control input-number qty-input"
+                                                                               type="text" name="quantity" value="0">
+                                                                        <button type="button" class="qty-right-plus"
+                                                                                data-type="plus" data-field="">
+                                                                            <i class="fa fa-plus"
+                                                                               aria-hidden="true"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="pills-order" role="tabpanel"
+                                 aria-labelledby="pills-order-tab">
+                                <div class="dashboard-order">
+                                    <div class="title">
+                                        <h2>تاریخچه سفارشات من</h2>
+                                        <span class="title-leaf title-leaf-gray">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="/static/Front/svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="order-contain">
+                                        {% for order in basket_orders %}
+                                            <div class="order-box dashboard-bg-box" style="width:100%">
+                                                <div class="order-container">
+                                                    <div class="order-icon">
+                                                        <i data-feather="box"></i>
+                                                    </div>
+
+                                                    <div class="order-detail">
+                                                        <h4>وضعیت <span>در انتظار</span></h4>
+                                                        <h6 class="text-content">{{ order.product.short_description }}</h6>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-order-detail">
+                                                    <a href="{% url 'ditail_product' order.product.slug %} "
+                                                       class="order-image">
+                                                        <img src="{{ order.product.image.url }}"
+                                                             class="blur-up lazyload" alt="">
+                                                    </a>
+
+                                                    <div class="order-wrap">
+                                                        <a href="{% url 'ditail_product' order.product.slug %} ">
+                                                            <h3>{{ order.product.product_name }}</h3>
+                                                        </a>
+                                                        <p class="text-content">{{ order.product.description }}</p>
+                                                        <ul class="product-size">
+                                                            <li>
+                                                                <div class="size-box">
+                                                                    <h6 class="text-content">قیمت : </h6>
+                                                                    <h5> {{ order.product.price_after_discount }}</h5>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="size-box">
+                                                                    <h6 class="text-content">امتیاز : </h6>
+                                                                    <div class="product-rating ms-2">
+                                                                        <ul class="rating">
+                                                                            {% for star in order.product.score|rangeInt %}
+                                                                                <li>
+                                                                                    <i data-feather="star"
+                                                                                       class="fill"></i>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                            {% for favorite in order.product.score|rangeNotfill %}
+                                                                                <li>
+                                                                                    <i data-feather="star"></i>
+                                                                                </li>
+                                                                            {% endfor %}
+
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+
+                                                            <li>
+                                                                <div class="size-box">
+                                                                    <h6 class="text-content">مقدار : </h6>
+                                                                    <h5>{{ order.product.weight }}</h5>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% for order in order_success %}
+                                            <div class="order-box dashboard-bg-box" style="width: 100%;">
+                                                <div class="order-container">
+                                                    <div class="order-icon">
+                                                        <i data-feather="box"></i>
+                                                    </div>
+
+                                                    <div class="order-detail">
+                                                        <h4>وضعیت <span class="success-bg">موفق</span></h4>
+                                                        <h6 class="text-content">{{ order.product.short_description }}</h6>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-order-detail">
+                                                    <a href="" class="order-image">
+                                                        <img src="{{ order.product.image.url }}"
+                                                             alt=""
+                                                             class="blur-up lazyload">
+                                                    </a>
+
+                                                    <div class="order-wrap">
+                                                        <a href="">
+                                                            <h3>{{ order.product.product_name }}</h3>
+                                                        </a>
+                                                        <p class="text-content">{{ order.product.description }}</p>
+                                                        <ul class="product-size">
+                                                            <li>
+                                                                <div class="size-box">
+                                                                    <h6 class="text-content">قیمت: </h6>
+                                                                    <h5>{{ order.product.price_after_discount }}
+                                                                        تومان</h5>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="size-box">
+                                                                    <h6 class="text-content">امتیاز : </h6>
+                                                                    <div class="product-rating ms-2">
+                                                                        <ul class="rating">
+                                                                            {% for foo in order.product.score|rangeInt %}
+                                                                                <li>
+                                                                                    <i data-feather="star"
+                                                                                       class="fill"></i>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                            {% for favorite in order.product.score|rangeNotfill %}
+                                                                                <li>
+                                                                                    <i data-feather="star"></i>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+
+                                                            <li>
+                                                                <div class="size-box">
+                                                                    <h6 class="text-content">مقدار : </h6>
+                                                                    <h5>{{ order.product.weight }}</h5>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane fade show" id="pills-profile" role="tabpanel"
+                                 aria-labelledby="pills-profile-tab">
+                                <div class="dashboard-profile">
+                                    <div class="title">
+                                        <h2>پروفایل من</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="/static/Front/svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="profile-detail dashboard-bg-box">
+                                        <div class="dashboard-title">
+                                            <h3>اطلاعات کلی</h3>
+                                        </div>
+                                        <div class="profile-name-detail">
+                                            <div class="d-sm-flex align-items-center d-block">
+                                                <h3>{{ user.username }}</h3>
+                                            </div>
+
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#editProfile">ویرایش</a>
+                                        </div>
+
+                                        <div class="location-profile">
+                                            <ul>
+                                                <li>
+                                                    <div class="location-box">
+                                                        <i data-feather="map-pin"></i>
+                                                        <h6>{{ user.address }}</h6>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="location-box">
+                                                        <i data-feather="mail"></i>
+                                                        <h6>{{ user.email }}</h6>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="location-box">
+                                                        <i data-feather="check-square"></i>
+                                                        <h6>میزان فعالیت :
+                                                            {{ user.last_login.year|activate_y }}{{ user.last_login.month|activate_m }}{{ user.last_login.day|activate_d }}</h6>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="profile-description">
+                                            <p>{{ site.user_profile_description }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-about dashboard-bg-box">
+                                        <div class="row">
+                                            <div class="col-xxl-7">
+                                                <div class="dashboard-title mb-3">
+                                                    <h3>اطلاعات کامل</h3>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>جنسیت :</td>
+                                                            <td>{{ user.gender }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>تاریخ تولد :</td>
+                                                            <td>{{ user.get_jalali_date }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>شماره تماس :</td>
+                                                            <td>
+                                                                <a href="javascript:void(0)"> {{ user.phone }}</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>آدرس :</td>
+                                                            <td>{{ user.address }}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="dashboard-title mb-3">
+                                                    <h3>اطلاعات ورود</h3>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>ایمیل :</td>
+                                                            <td>
+                                                                <a href="javascript:void(0)">{{ user.email }}
+                                                                    <span data-bs-toggle="modal"
+                                                                          data-bs-target="#editProfile">ویرایش</span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>رمز ورود :</td>
+                                                            <td>
+                                                                <a href="{% url 'reset_password' %}">●●●●●●
+
+                                                                    <span data-bs-toggle="modal"
+                                                                          data-bs-target="#editProfile">ویرایش</span></a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-5">
+                                                <div class="profile-image">
+                                                    <img src="/static/Front/images/inner-page/dashboard-profile.png"
+                                                         class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="pills-security" role="tabpanel"
+                                 aria-labelledby="pills-security-tab">
+                                <div class="dashboard-privacy">
+                                    <div class="dashboard-bg-box mt-4">
+                                        <div class="dashboard-title mb-4">
+                                            <h3>تنظیمات حساب</h3>
+                                        </div>
+
+                                        <div class="privacy-box">
+                                            <div class="d-flex align-items-start">
+                                                <h6>حساب کاربریم را پس از خارج شدن من حذف کن!!</h6>
+                                            </div>
+                                            <p class="text-content">حساب کاربری شما پس از خروج شما حذف خواهد (این فرآیند
+                                                قابل بازیابی نیست!)</p>
+                                        </div>
+
+
+                                        <button class="btn theme-bg-color btn-md fw-bold mt-4 text-white"
+                                                onclick="location.href = '{% url 'deleteAccount' %}?DeleteAccount=True' ">
+                                            حذف حساب کاربری
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- User Dashboard Section End -->
+
+    <!-- Bg overlay Start -->
+    <div class="bg-overlay"></div>
+    <!-- Bg overlay End -->
+
+    <!-- Add address modal box start -->
+    <div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">افرودن آدرس جدید</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="text" class="form-control" id="fname" placeholder="نام خود را وارد کنید">
+                            <label for="fname">نام</label>
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="text" class="form-control" id="lname"
+                                   placeholder="نام خانوادگی خود را وارد کنید">
+                            <label for="lname">نام خانوادگی</label>
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="email" class="form-control" id="email" placeholder="ایمیل خود را وارد کنید">
+                            <label for="email">ایمیل</label>
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="address"
+                                      style="height: 100px"></textarea>
+                            <label for="address">آدرس</label>
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="email" class="form-control" id="pin" placeholder="کد پستی خود را وارد کنید">
+                            <label for="pin">کد پستی</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">بستن</button>
+                    <button type="button" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">ذخیره
+                        تغییرات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add address modal box end -->
+
+
+
+    <!-- Edit Profile Start -->
+    <div class="modal fade theme-modal" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel2"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">ویرایش پروفایل</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-xxl-12">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" class="form-control" id="input-username1"
+                                           value="{{ user.username }}">
+                                    <label for="input-username1">نام کامل</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xxl-6">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input type="email" class="form-control" id="input-email1" value="{{ user.email }}">
+                                    <label for="input-email1">آدرس ایمیل</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xxl-6">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input class="form-control" type="tel" value="{{ user.phone }}" name="mobile"
+                                           id="input-phone1"
+                                           maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value =
+                                            this.value.slice(0, this.maxLength);">
+                                    <label for="input-phone1">شماره تماس</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-12">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" class="form-control" id="input-address1"
+                                           value="{{ user.address }}">
+                                    <label for="input-address1">افزودن آدرس</label>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="col-xxl-4">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <select class="form-select" id="input-city1">
+                                        <option selected>{{ user.city }}</option>
+                                        {% for city in user.city_list %}
+                                            <option value="{{ city|city }}">{{ city|city_en }}</option>
+                                        {% endfor %}
+
+
+                                    </select>
+                                    <label for="input-city1">شهر</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xxl-4">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" class="form-control" id="input-code_post1"
+                                           value="{{ user.code_post }}">
+                                    <label for="input-code_post1">کد پستی</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-animation btn-md fw-bold"
+                            data-bs-dismiss="modal">بستن
+                    </button>
+                    <button type="button" data-bs-dismiss="modal"
+                            class="btn theme-bg-color btn-md fw-bold text-light" onclick="EditProfileJS()">ذخیره تغییرات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Profile End -->
+
+    <!-- Edit Card Start -->
+    <div class="modal fade theme-modal" id="editCard" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel8">ویرایش حساب</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-xxl-6">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" class="form-control" id="finame" value="{{ user.first_name }}">
+                                    <label for="finame">نام</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xxl-6">
+                            <form>
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" class="form-control" id="laname" value="{{ user.last_name }}">
+                                    <label for="laname">نام خانوادگی</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        {#                        <div class="col-xxl-4">#}
+                        {#                            <form>#}
+                        {#                                <div class="form-floating theme-form-floating">#}
+                        {#                                    <select class="form-select" id="floatingSelect12"#}
+                        {#                                        aria-label="Floating label select example">#}
+                        {#                                        <option selected>بانک</option>#}
+                        {#                                        <option value="kindom">ملی</option>#}
+                        {#                                        <option value="states">مسکن</option>#}
+                        {#                                        <option value="fra">کشاورزی</option>#}
+                        {#                                        <option value="china">تجارت</option>#}
+                        {#                                        <option value="spain">ملت</option>#}
+                        {#                                    </select>#}
+                        {#                                    <label for="floatingSelect12">نام بانک</label>#}
+                        {#                                </div>#}
+                        {#                            </form>#}
+                        {#                        </div>#}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-animation btn-md fw-bold"
+                            data-bs-dismiss="modal">لغو
+                    </button>
+                    <button type="button" class="btn theme-bg-color btn-md fw-bold text-light">بروزرسانی حساب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Card End -->
+
+    <!-- Remove Profile Modal Start -->
+    <div class="modal fade theme-modal remove-profile" id="removeProfile" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header d-block text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel22">هشدار</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="remove-box">
+                        <p>پس از حذف حساب امکان بازگردانی حساب وجود ندارد. آیا ادامه میدهید ؟</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">نه</button>
+                    <button type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                            data-bs-target="#removeAddress" data-bs-toggle="modal">بله
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade theme-modal remove-profile" id="removeAddress" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel12">تمام!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="remove-box text-center">
+                        <h4 class="text-content">حساب با موفقیت حذف شد.</h4>
+                    </div>
+                </div>
+                <div class="modal-footer pt-0">
+                    <button type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                            data-bs-dismiss="modal">بستن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Remove Profile Modal End -->
+    <script>
+        function EditProfileJS() {
+            const x = $('#input-username1').val()
+            const y = $('#input-email1').val()
+            const z = $('#input-phone1').val()
+            const a = $('#input-address1').val()
+            const b = $('#input-city1').val()
+            const c = $('#input-code_post1').val()
+            location.href = '{% url 'editAccount' %}?username=' + x + '&email=' + y + '&phone=' + z + '&address=' + a + '&city=' + b + '&code_post' + c
+        }
+    </script>
+{% endblock %}

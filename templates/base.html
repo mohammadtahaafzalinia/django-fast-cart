@@ -1,0 +1,29 @@
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fastkart">
+    <meta name="keywords" content="Fastkart">
+    <meta name="author" content="Fastkart">
+    <link rel="icon" href="/static/Front/images/favicon/1.png" type="image/x-icon">
+    <title>{% block title_page %}{% endblock %}</title>
+    {% render_partial 'home_module.views.link' %}
+</head>
+<body>
+{% render_partial 'home_module.views.loader' %}
+{% render_partial 'home_module.views.header' %}
+{% render_partial 'home_module.views.mobile_fix' %}
+{% block continer_page %}
+{% endblock %}
+{% render_partial 'home_module.views.footer' %}
+{% render_partial 'home_module.views.location_modul' %}
+{% render_partial 'home_module.views.modul_box' %}
+{% render_partial 'home_module.views.theme_options' %}
+{% render_partial 'home_module.views.js' %}
+<script src="/static/Front/js/user.js"></script>
+</body>
+</html>

@@ -1,0 +1,1545 @@
+{% load thumbnail %}
+{% load poll_extras %}
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fastkart">
+    <meta name="keywords" content="Fastkart">
+    <meta name="author" content="Fastkart">
+    <link rel="icon" href="/static/Front/images/favicon/5.png" type="image/x-icon">
+    <title>فست کارت</title>
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="/static/Front/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="/static/Front/css/vendors/bootstrap.rtl.css">
+    <!-- wow css -->
+    <link rel="stylesheet" href="/static/Front/css/animate.min.css"/>
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="/static/Front/css/vendors/font-awesome.css">
+
+    <!-- feather icon css -->
+    <link rel="stylesheet" type="text/css" href="/static/Front/css/vendors/feather-icon.css">
+
+    <!-- Plugin CSS file with desired skin css -->
+    <link rel="stylesheet" href="/static/Front/css/vendors/ion.rangeSlider.min.css">
+
+    <!-- slick css -->
+    <link rel="stylesheet" type="text/css" href="/static/Front/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/static/Front/css/vendors/slick/slick-theme.css">
+
+    <!-- animation css -->
+    <link rel="stylesheet" type="text/css" href="/static/Front/css/font-style.css">
+
+    <!-- Template css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="/static/Front/css/style.css">
+    <link rel="stylesheet" href="/static/Front/css/custom.css">
+    <link rel="stylesheet" href="/static/Front/css/font.css">
+</head>
+
+<body class="theme-color-3">
+
+<!-- Loader Start -->
+<div class="fullpage-loader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+<!-- Loader End -->
+
+<!-- Header Start -->
+<header class="header-3">
+    <div class="top-nav sticky-header sticky-header-2">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="navbar-top">
+                        <button class="navbar-toggler d-xl-none d-block p-0 me-3" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+                                <span class="navbar-toggler-icon">
+                                    <i class="iconly-Category icli"></i>
+                                </span>
+                        </button>
+                        <a href="{% url 'home' %}" class="web-logo nav-logo">
+                            <img src="{{ site_setting.icon.url }}" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+
+                        <div class="search-full">
+                            <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i data-feather="search" class="font-light"></i>
+                                    </span>
+                                <input type="text" class="form-control search-type" placeholder="جتسجو کنید ...">
+                                <span class="input-group-text close-search">
+                                        <i data-feather="x" class="font-light"></i>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="middle-box">
+                            <div class="center-box">
+                                <div class="location-box-2">
+                                </div>
+
+                                <div class="searchbar-box-2 input-group d-xl-flex d-none">
+                                    <button class="btn search-icon" type="button">
+                                        <i class="iconly-Search icli"></i>
+                                    </button>
+                                    <input type="text" id="input-search1" value="" class="form-control"
+                                           placeholder="نام محصول موردنظر را وارد کنید ...">
+                                    <button class="btn search-button" type="button" onclick="SearchJS()">جستجو</button>
+                                    <script>
+                                        function SearchJS() {
+                                            const x = $('#input-search1').val()
+                                            location.href = '{% url 'search_product' %}?search=' + x
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        {% if setting %}
+                            <div class="rightside-menu support-sidemenu">
+                                <div class="support-box">
+                                    <div class="support-image">
+                                        <img src="{{ site_setting.icon_phone.url }}" class="img-fluid blur-up lazyload"
+                                             alt="">
+                                    </div>
+                                    <div class="support-number">
+                                        <h2>{{ site_setting.phone }}</h2>
+                                        <h4> پشتیبانی 24 ساعته</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12 position-relative">
+                <div class="main-nav nav-left-align">
+                    <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky p-0">
+                        <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                            <div class="offcanvas-header navbar-shadow">
+                                <h5>منو</h5>
+                                <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-2" href="{% url 'home' %}">خانه</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-2"
+                                           onclick="location.href = '{% url 'main_product' %}'; ">فروشگاه</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-2"
+                                           onclick="location.href = '{% url 'blog-grid' %}' ;">وبلاگ</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-2" href="{% url 'about-us' %}">درباره ما</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-2" href="{% url 'contact-us' %}">تماس با ما</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rightside-menu">
+                        <ul class="option-list-2">
+                            <li>
+                                <a href="javascript:void(0)" class="header-icon search-box search-icon">
+                                    <i class="iconly-Search icli"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'compare' %}" class="header-icon">
+                                    {% if message %}
+                                        <small class="badge-number badge-light">{{ compare_count }}</small>
+                                    {% endif %}
+                                    <i class="iconly-Swap icli"></i>
+                                </a>
+                            </li>
+
+                            {% if favorite is not None %}
+                                                            <li class="onhover-dropdown">
+                                <a href="{% url 'favorites' %}" class="header-icon swap-icon">
+                                    <i class="iconly-Heart icli"></i>
+                                </a>
+
+                                <div class="onhover-div">
+
+                                    <ul class="cart-list">
+                                        <li>
+                                            <div class="drop-cart">
+                                                <a href="{% url 'ditail_product' favorite.product.slug %}"
+                                                   class="drop-image">
+                                                    {% thumbnail favorite.product.image '192x161' crop='center' quality=50 as im %}
+                                                        <img src="{{ favorite.product.image.url }}"
+                                                             class="blur-up lazyload" alt="">
+                                                    {% endthumbnail %}
+
+                                                </a>
+
+                                                <div class="drop-contain">
+                                                    <a href="{% url 'ditail_product' favorite.product.slug %}">
+                                                        <h5>{{ favorite.product.product_name }}</h5>
+                                                    </a>
+                                                    <h6>{{ favorite.product.price_after_discount }}</h6>
+                                                    <a href="{% url 'favorites' %}" class="close-button">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="drop-cart">
+                                                <a href="{% url 'ditail_product' favorite.product.slug %}"
+                                                   class="drop-image">
+                                                    {% thumbnail favorite.product.image '192x161' crop='center' quality=50 as im %}
+                                                        <img src="{{ favorite.product.image.url }}"
+                                                             class="blur-up lazyload" alt="">
+                                                    {% endthumbnail %}
+
+                                                </a>
+
+                                                <div class="drop-contain">
+                                                    <a href="{% url 'ditail_product' favorite.product.slug %}">
+                                                        <h5>{{ favorite.product.product_name }}</h5>
+                                                    </a>
+                                                    <h6>{{ favorite.product.price_after_discount }}</h6>
+                                                    <a href="{% url 'favorites' %}" class="close-button">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <div class="price-box">
+                                        <h5>جمع کل :</h5>
+                                        <h4 class="theme-color fw-bold">106.680 تومان</h4>
+                                    </div>
+
+                                    <div class="button-group">
+                                        <a href="{% url 'Cart' %}" class="btn btn-sm cart-button">نمایش سبد خرید</a>
+                                        <a href="{% url 'order-success' %}" class="btn btn-sm cart-button theme-bg-color
+                                                    text-white">پرداخت</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            	
+                            {% endif %} 
+
+                            <li>
+                                <a href="{% url 'Cart' %}" class="header-icon bag-icon">
+                                    {% if message %}
+                                        <small class="badge-number badge-light">{{ basket_count }}</small>
+                                    {% endif %}
+                                    <i class="iconly-Bag-2 icli"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <a href="{% url 'sign-up' %}" target="_blank" class="user-box">
+                                <span class="header-icon">
+                                        <i class="iconly-Profile icli"></i>
+                                </span>
+                            {% if max_len == False %}
+                                {% if message %}
+                                    <div class="user-name">
+                                        <h6 class="text-content">حساب کاربری من</h6>
+                                        <h4 class="mt-1">{{ user.username }}</h4>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- mobile fix menu start -->
+<div class="mobile-menu d-md-none d-block mobile-cart">
+    <ul>
+        <li class="active">
+            <a href="{% url 'home' %}">
+                <i class="iconly-Home icli"></i>
+                <span>خانه</span>
+            </a>
+        </li>
+
+        <li class="mobile-category">
+            <a href="{% url 'main_product' %}">
+                <i class="iconly-Category icli js-link"></i>
+                <span>دسته بندی</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'search_product' %}" class="search-box">
+                <i class="iconly-Search icli"></i>
+                <span>جستجو</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'favorites' %}" class="notifi-wishlist">
+                <i class="iconly-Heart icli"></i>
+                <span>علاقه‌مندی‌ها</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'Cart' %}">
+                <i class="iconly-Bag-2 icli fly-cate"></i>
+                <span>سبد خرید</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- mobile fix menu end -->
+
+<!-- Home Section Start -->
+<section class="home-section-2 home-section-bg pt-0 overflow-hidden">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-animate">
+                    <div>
+                        <div class="row g-4">
+                            <div class="col-xxl-6 col-xl-8 col-md-6">
+                                <div class="home-contain h-100 bg-size blur-up lazyloaded"
+                                     style="background-image: url({{ 2|image_m }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                    <img src="{{ 1|image_m }}" class="img-fluid bg-img blur-up lazyloaded" alt=""
+                                         style="display: none;">
+                                    <div class="home-detail w-50 p-center-left position-relative">
+                                        <div>
+                                            <h6 class="ls-expanded theme-color">{{ 1|title_m }}</h6>
+                                            <h1 class="fw-bold w-100">{{ 1|short_description_m }}</h1>
+                                            <h3 class="text-content fw-light"></h3>
+                                            <p class="d-sm-block d-none">{{ 1|description_m }}</p>
+                                            <button onclick="location.href = '{{ 1|url_m }}';"
+                                                    class="btn mt-sm-4 btn-2 theme-bg-color text-white mend-auto btn-2-animation">
+                                                خرید آنلاین
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-3 col-xl-4 col-md-6 ratio_medium">
+                                <div class="home-contain">
+                                    <div class="bg-size blur-up lazyloaded"
+                                         style="background-image: url({{ 2|image_m }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                        <img src="{{ 2|image_m }}" class="img-fluid bg-img blur-up lazyloaded" alt=""
+                                             style="display: none;">
+                                    </div>
+                                    <div class="home-detail text-center p-top-center w-100 text-white">
+                                        <div>
+                                            <h4 class="fw-bold">{{ 2|short_description_m }}</h4>
+                                            <h5 class="text-center">{{ 2|description_m }}</h5>
+                                            <button class="btn bg-white theme-color mt-3 home-button mx-auto btn-2"
+                                                    onclick="location.href = '{{ 2|url_m }}';">خرید آنلاین
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-3 ratio_65">
+                                <div class="row g-3">
+                                    <div class="col-xxl-12 col-sm-6">
+                                        <div class="home-contain">
+                                            <a href="{{ 3|url_m }}" class="bg-size blur-up lazyloaded"
+                                               style="background-image: url({{ 3|image_m }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                                <img src="{{ 3|image_m }}" class="img-fluid bg-img blur-up lazyloaded"
+                                                     alt="" style="display: none;">
+                                            </a>
+                                            <div class="home-detail text-white p-center text-center">
+                                                <div>
+                                                    <h4 class="text-center">{{ 3|description_m }}</h4>
+                                                    <h5 class="text-center">{{ 3|short_description_m }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-12 col-sm-6">
+                                        <div class="home-contain">
+                                            <a href="{{ 4|url_m }}" class="bg-size blur-up lazyloaded"
+                                               style="background-image: url({{ 4|image_m }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                                <img src="{{ 4|image_m }}" class="img-fluid bg-img blur-up lazyloaded"
+                                                     alt="" style="display: none;">
+                                            </a>
+                                            <div class="home-detail text-white w-50 p-center-left home-p-sm">
+                                                <div>
+                                                    <h4 class="fw-bold">{{ 4|description_m }}</h4>
+                                                    <h5>{{ 4|short_description_m }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Home Section End -->
+
+<!-- Banner Section Start -->
+<section class="banner-section overflow-hidden">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-4 g-3 ratio_65">
+            {% for rang in rangs %}
+                <div class="col-xxl-3 col-sm-6">
+                    <div class="banner-contain-3 hover-effect">
+                        <a href="{{ rang|url_m }}">
+                            <img src="{{ rang|image_m }}" class="bg-img blur-up lazyload" alt="">
+                        </a>
+                        <div class="banner-detail p-center-left w-60 banner-p-sm mend-auto">
+                            <div>
+                                <h5 class="fw-light mb-2">{{ rang|description_m }}</h5>
+                                <h4 class="fw-bold mb-0">{{ rang|short_description_m }}</h4>
+                                <button onclick="location.href = '{{ rang|url_m }}';"
+                                        class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">خرید آنلاین
+                                    <i
+                                            class="fa-solid fa-chevron-left"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+<!-- Category Section Start -->
+<section class="category-section-3">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>دسته بندی ما</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="category-slider-1 arrow-slider wow fadeInUp">
+                    {% for category in categorys %}
+                        <div>
+                            <div class="category-box-list">
+                                <a href="{% url 'main_product' %}?category={{ category.id }}" class="category-name">
+                                    <h4>{{ category.title }}</h4>
+                                </a>
+                                <div class="category-box-view">
+                                    <a href="{% url 'main_product' %}?category={{ category.id }}">
+                                        {#                                                {% thumbnail category.image_category '130x130' crop='center' as im %}#}
+                                        <img src="{{ category.image_category.url }}"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                        {#                                                {% endthumbnail %}#}
+
+                                    </a>
+                                    <button onclick="location.href = '{% url 'main_product' %}?category={{ category.id }}';"
+                                            class="btn shop-button">
+                                        <span>خرید آنلاین</span>
+                                        <i class="fas fa-angle-left"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Category Section End -->
+
+<!-- Product Fruit & Vegetables Section Start -->
+<section class="product-section-3">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>سوپر مارکت</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-7_1 arrow-slider img-slider">
+                    {% for product in products|filter_model_3 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp">
+                                <div class="product-image product-image-2">
+                                    <a href="{% url 'ditail_product' product.slug %}">
+                                        <img src="{{ product.image.url }}"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                            <a href="{% url 'ditail_product' product.slug %}" data-bs-toggle="modal"
+                                               data-bs-target="#view">
+                                                <i class="iconly-Show icli"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="افزودن به لیست علاقه‌مندی">
+                                            <a onclick="AddF({{ product.id }})" class="notifi-wishlist">
+                                                <i class="iconly-Heart icli"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                            <a href=".{% url 'compare' %}?slug={{ product.slug }}">
+                                                <i class="iconly-Swap icli"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for foo in product.score|rangeInt %}
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <a href="{% url 'ditail_product' product.slug %}">
+                                        <h5 class="name text-title">{{ product.name_product }}</h5>
+                                    </a>
+                                    <h5 class="price theme-color">{{ product.price_after_discount }}
+                                        <del>{{ product.price }}</del>
+                                    </h5>
+
+                                    <div class="addtocart_btn">
+                                        <button class="add-button addcart-button btn buy-button text-light"
+                                                onclick="AddProductBasketBuy({{ product.id }})">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Fruit & Vegetables Section End -->
+
+
+<!-- Deal Section Start -->
+<section class="product-section product-section-3">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>پرفروش ترین محصولات</h2>
+        </div>
+        <div class="row g-sm-4 g-3">
+            <div class="col-xxl-4 col-lg-5 order-lg-2">
+                <div class="product-bg-image wow fadeInUp">
+                    <div class="product-title product-warning">
+                        <h2>پیشنهاد ویژه</h2>
+                    </div>
+
+                    <div class="product-box-4 product-box-3 rounded-0">
+                        <div class="deal-box">
+                            <div class="circle-box">
+                                <div class="shape-circle">
+                                    <img src="/static/Front/images/grocery/circle.svg" class="blur-up lazyload" alt="">
+                                    <div class="shape-text">
+                                        <h6>تخفیف <br> داغ</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-selling-slider product-arrow">
+                            {% for sale in sales %}
+                                {% if sale.proposal %}
+                                    <div>
+                                        <div class="product-image">
+                                            <a href="{% url 'ditail_product' sale.slug %}">
+                                                {% thumbnail sale.image "328x276" crop='center' as im %}
+                                                    <img src="{{ im.url }}"
+                                                         class="img-fluid product-image blur-up lazyload" alt="">
+                                                {% endthumbnail %}
+                                            </a>
+
+                                            <ul class="option">
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                                    <a href="{% url 'ditail_product' sale.slug %}"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#view">
+                                                        <i class="iconly-Show icli"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="افزودن به لیست علاقه‌مندی">
+                                                    <a onclick="Add({{ sale.id }})" class="notifi-wishlist">
+                                                        <i class="iconly-Heart icli"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                                    <a href="{% url 'compare' %}?slug={{ sale.slug }}">
+                                                        <i class="iconly-Swap icli"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="product-detail text-center">
+                                            <ul class="rating justify-content-center">
+                                                {% for foo in sale.score|rangeInt %}
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <a href="{% url 'ditail_product' sale.slug %}">
+                                                <h3 class="name w-100 mx-auto text-center">{{ sale.product_name }}</h3>
+                                            </a>
+                                            <h3 class="price theme-color d-flex justify-content-center">
+                                                {{ sale.price_after_discount }} تومان
+                                                <del class="delete-price">{{ sale.price }}</del>
+                                            </h3>
+                                            <div class="progress custom-progressbar">
+                                                <div class="progress-bar" style="width: 79%" role="progressbar"
+                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <h5 class="text-content"><span class="ms-auto text-content ms-auto-amin">زمان اتمام :</span>باقی
+                                                مانده : <span class="text-dark">&#160;30</span></h5>
+                                            <div class="timer timer-2 ms-0 my-4" id="clockdiv-1" data-hours="1"
+                                                 data-minutes="2" data-seconds="3">
+                                                <ul class="d-flex justify-content-center">
+                                                    <li>
+                                                        <div class="counter">
+                                                            <div class="seconds">
+                                                                <h6></h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="counter">
+                                                            <div class="minutes">
+                                                                <h6></h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="counter">
+                                                            <div class="hours">
+                                                                <h6></h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="counter">
+                                                            <div class="days">
+                                                                <h6></h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-8 col-lg-7 order-lg-1">
+                {% for foo in 2|rangeInt %}
+                    <div class="slider-5_2 img-slider">
+                        {% if foo == 0 %}
+
+                            {% for sale in sales|order %}
+                                <div>
+                                    <div class="product-box-4 wow fadeInUp">
+                                        <div class="product-image product-image-2">
+                                            <a href="{% url 'ditail_product' sale.slug %}">
+                                                <img src="{{ sale.image.url }}"
+                                                     class="img-fluid blur-up lazyload" alt="">
+                                            </a>
+
+                                            <ul class="option">
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                                    <a href="{% url 'ditail_product' sale.slug %}"
+                                                       data-bs-toggle="modal" data-bs-target="#view">
+                                                        <i class="iconly-Show icli"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="افزودن به لیست علاقه‌مندی">
+                                                    <a onclick="AddF({{ sale.id }})" class="notifi-wishlist">
+                                                        <i class="iconly-Heart icli"></i>
+                                                    </a>
+                                                    <script>
+                                                        function AddF(Idproduct) {
+                                                            $.get('/product/add-favorite/', {
+                                                                'jur75@4KDOUTDL[PWQIEYWK.BZN;A9YFEGFEIIY': Idproduct,
+                                                            }).then(
+                                                                res => {
+                                                                    return res
+                                                                }
+                                                            )
+                                                        }
+                                                    </script>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                                    <a href="{% url 'compare' %}?slug={{ sale.slug }}">
+                                                        <i class="iconly-Swap icli"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="product-detail">
+                                            <ul class="rating">
+                                                {% for foo in sale.score|rangeInt %}
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <a href="">
+                                                <h5 class="name text-title">{{ sale.product_name }}</h5>
+                                            </a>
+                                            <h5 class="price theme-color">{{ sale.price_after_discount }}
+                                                <del>{{ sale.price }}</del>
+                                            </h5>
+                                            <div class="addtocart_btn">
+                                                <button class="add-button addcart-button btn buy-button text-light">
+                                                    <i class="fa-solid fa-plus"
+                                                       onclick="AddProductBasketBuy({{ sale.id }})"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        {% else %}
+
+                            {% for sale in sales|order2 %}
+                                <div>
+                                    <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                        <div class="product-image product-image-2">
+                                            <a href="{% url 'ditail_product' sale.slug %}">
+                                                <img src="{{ sale.image.url }}"
+                                                     class="img-fluid blur-up lazyload" alt="">
+                                            </a>
+
+                                            <ul class="option">
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                                    <a href="{% url 'ditail_product' sale.slug %}"
+                                                       data-bs-toggle="modal" data-bs-target="#view">
+                                                        <i class="iconly-Show icli"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="افزودن به لیست علاقه‌مندی">
+                                                    <a onclick="AddF({{ sale.id }})" class="notifi-wishlist">
+                                                        <i class="iconly-Heart icli"></i>
+                                                    </a>
+                                                    <script>
+                                                        function AddF(Idproduct) {
+                                                            $.get('/product/add-favorite/', {
+                                                                'jur75@4KDOUTDL[PWQIEYWK.BZN;A9YFEGFEIIY': Idproduct,
+                                                            }).then(
+                                                                res => {
+                                                                    return res
+                                                                }
+                                                            )
+                                                        }
+                                                    </script>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                                    <a href="{% url 'compare' %}?slug={{ sale.slug }}">
+                                                        <i class="iconly-Swap icli"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="product-detail">
+                                            <ul class="rating">
+                                                {% for foo in sale.score|rangeInt %}
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <a href="">
+                                                <h5 class="name text-title">{{ sale.product_name }}</h5>
+                                            </a>
+                                            <h5 class="price theme-color">{{ sale.price_after_discount }}
+                                                <del>{{ sale.price }}</del>
+                                            </h5>
+                                            <div class="addtocart_btn">
+                                                <button class="add-button addcart-button btn buy-button text-light">
+                                                    <i class="fa-solid fa-plus"
+                                                       onclick="AddProductBasketBuy({{ sale.id }})"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        {% endif %}
+                    </div>
+
+
+
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Deal Section End -->
+
+<!-- Offer Section Start -->
+<section class="offer-section">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="offer-box hover-effect">
+                    <h2><span>{{ 9|description_m }} </span> {{ 9|short_description_m }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Offer Section End -->
+
+<!-- Product Breakfast & Dairy Section Start -->
+<section class="product-section-4">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>لوازم بهداشتی</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-7_1 arrow-slider img-slider">
+                    {% for product in products|filter_model_1 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp">
+                                <div class="product-image product-image-2">
+                                    <a href="{% url 'ditail_product' product.slug %}">
+                                        <img src="{{ product.image.url }}"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                            <a href="{% url 'ditail_product' product.slug %}" data-bs-toggle="modal"
+                                               data-bs-target="#view">
+                                                <i class="iconly-Show icli"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="افزودن به لیست علاقه‌مندی">
+                                            <a onclick="AddF({{ product.id }})" class="notifi-wishlist">
+                                                <i class="iconly-Heart icli"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                            <a href=".{% url 'compare' %}?slug={{ product.slug }}">
+                                                <i class="iconly-Swap icli"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for foo in product.score|rangeInt %}
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <a href="{% url 'ditail_product' product.slug %}">
+                                        <h5 class="name text-title">{{ product.product_name }}</h5>
+                                    </a>
+                                    <h5 class="price theme-color">{{ product.price_after_discount }}
+                                        <del>{{ product.price }}</del>
+                                    </h5>
+
+                                    <div class="addtocart_btn">
+                                        <button class="add-button addcart-button btn buy-button text-light"
+                                                onclick="AddProductBasketBuy({{ product.id }})">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Breakfast & Dairy Section End -->
+
+
+<!-- Banner Section Start -->
+<section class="banner-section">
+    <div class="container-fluid-lg">
+        <div class="row gy-lg-0 gy-3">
+            <div class="col-lg-6">
+                <div class="banner-contain-3 hover-effect">
+                    <div>
+                        <img src="{{ 10|image_m }}" class="bg-img blur-up lazyload" alt="">
+                        <div
+                                class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
+                            <div>
+                                <h2 class="text-great fw-normal text-danger aviny">{{ 10|short_description_m }}</h2>
+                                <h3 class="mb-1 fw-bold">{{ 10|description_m }}<br class="d-sm-block d-none"> موجودی
+                                </h3>
+                                <h4 class="text-content">{{ 10|title_m }}</h4>
+                                <button class="btn btn-md theme-bg-color text-white mt-sm-3 mt-1 fw-bold mend-auto"
+                                        onclick="location.href = '{{ 10|url_m }}';">خرید آنلاین
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="banner-contain-3 hover-effect">
+                    <div>
+                        <img src="{{ 11|image_m }}" class="bg-img blur-up lazyload" alt="">
+                        <div
+                                class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
+                            <div>
+                                <h2 class="text-great fw-normal text-danger aviny">{{ 11|short_description_m }}</h2>
+                                <h3 class="mb-1 fw-bold">{{ 11|description_m }}<br class="d-sm-block d-none"> موجودی
+                                </h3>
+                                <h4 class="text-content">{{ 11|title_m }}</h4>
+                                <button class="btn btn-md theme-bg-color text-white mt-sm-3 mt-1 fw-bold mend-auto"
+                                        onclick="location.href = '{{ 11|url_m }}';">خرید آنلاین
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+
+<!-- Banner Section Start -->
+<section class="banner-section">
+    <div class="container-fluid-lg">
+        <div class="row gy-lg-0 gy-3">
+            <div class="col-lg-8">
+                <div class="banner-contain-3 h-100 pt-sm-5 hover-effect">
+                    <img src="{{ 13|image_m }}" class="bg-img blur-up lazyload" alt="">
+                    <div
+                            class="banner-detail banner-p-sm p-center-right position-relative banner-minus-position banner-detail-deliver">
+                        <div>
+                            <h3 class="fw-bold banner-contain aviny">{{ 13|short_description_m }}</h3>
+                            <h4 class="mb-sm-3 mb-2 delivery-contain">{{ 13|description_m }}</h4>
+                            <ul class="banner-list">
+                                <li>
+                                    <div class="delivery-box">
+                                        <div class="check-icon">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+
+                                        <div class="check-contain">
+                                            <h5>{{ 13|title_m }}</h5>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <button class="btn theme-bg-color text-white mt-sm-4 mt-3 fw-bold"
+                                    onclick="location.href = '{{ 13|url_m }}';">بیشتر بدانید
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="banner-contain-3 pt-lg-4 h-100 hover-effect">
+                    <a href="{{ 12|url_m }}">
+                        <img src="{{ 12|image_m }}"
+                             class="img-fluid social-image blur-up lazyload w-100" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+
+<!-- Product Kitchen & Dining Needs Section Start -->
+<section class="product-section">
+    <div class="container-fluid-lg">
+        <div class="title">
+            <h2>نیازهای آشپزخانه و غذاخوری</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-7_1 arrow-slider img-slider">
+                    {% for product in products|filter_model_2 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp">
+                                <div class="product-image product-image-2">
+                                    <a href="{% url 'ditail_product' product.slug %}">
+                                        <img src="{{ product.image.url }}"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش">
+                                            <a href="{% url 'ditail_product' product.slug %}" data-bs-toggle="modal"
+                                               data-bs-target="#view">
+                                                <i class="iconly-Show icli"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="افزودن به لیست علاقه‌مندی">
+                                            <a onclick="AddF({{ product.id }})" class="notifi-wishlist">
+                                                <i class="iconly-Heart icli"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="مقایسه">
+                                            <a href=".{% url 'compare' %}?slug={{ product.slug }}">
+                                                <i class="iconly-Swap icli"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for foo in product.score|rangeInt %}
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <a href="{% url 'ditail_product' product.slug %}">
+                                        <h5 class="name text-title">{{ product.product_name }}</h5>
+                                    </a>
+                                    <h5 class="price theme-color">{{ product.price_after_discount }}
+                                        <del>{{ product.price }}</del>
+                                    </h5>
+
+                                    <div class="addtocart_btn">
+                                        <button class="add-button addcart-button btn buy-button text-light"
+                                                onclick="AddProductBasketBuy({{ product.id }})">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Kitchen & Dining Needs Section End -->
+
+<!-- Blog Section Start -->
+<section class="blog-section">
+    <div class="container-fluid-lg">
+        <div class="title title-4">
+            <h2>وبلاگ</h2>
+        </div>
+
+        <div class="slider-3-blog arrow-slider">
+            {% for blog in blogs %}
+                <div>
+                    <div class="blog-box ratio_45">
+                        <div class="blog-box-image">
+                            <a href="{% url 'blog-ditail' blog.slug %}">
+                                <img src="{{ blog.image.url }}" class="blur-up lazyload bg-img" alt="">
+                            </a>
+                        </div>
+
+                        <div class="blog-detail">
+                            <label>{{ blog.name_blog }}</label>
+                            <a href="{% url 'blog-ditail' blog.slug %}">
+                                <h3>{{ blog.short_description }}</h3>
+                            </a>
+                            <h5 class="text-content">{{ blog.author }} - {{ blog.get_jalali_data }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
+
+<!-- Service Section Start -->
+<section class="service-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-3 row-cols-xxl-5 row-cols-lg-3 row-cols-md-2">
+            <div>
+                <div class="service-contain-2">
+                    <svg class="icon-width">
+                        <use xlink:href="/static/static/Front/svg/svg/service-icon-4.svg#shipping"></use>
+                    </svg>
+                    <div class="service-detail">
+                        <h3>ارسال رایگان</h3>
+                        <h6 class="text-content">ارسال رایگان به سراسر جهان</h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="service-contain-2">
+                    <svg class="icon-width">
+                        <use xlink:href="/static/static/Front/svg/svg/service-icon-4.svg#service"></use>
+                    </svg>
+                    <div class="service-detail">
+                        <h3>خدمات 24 ساعته</h3>
+                        <h6 class="text-content">خدمات آنلاین در 24×7</h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="service-contain-2">
+                    <svg class="icon-width">
+                        <use xlink:href="/static/static/Front/svg/svg/service-icon-4.svg#pay"></use>
+                    </svg>
+                    <div class="service-detail">
+                        <h3>پرداخت آنلاین</h3>
+                        <h6 class="text-content">پرداخت آنلاین</h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="service-contain-2">
+                    <svg class="icon-width">
+                        <use xlink:href="/static/static/Front/svg/svg/service-icon-4.svg#offer"></use>
+                    </svg>
+                    <div class="service-detail">
+                        <h3>پیشنهاد جشنواره</h3>
+                        <h6 class="text-content">فروش فوق العاده تا 50% تخفیف</h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="service-contain-2">
+                    <svg class="icon-width">
+                        <use xlink:href="/static/static/Front/svg/svg/service-icon-4.svg#return"></use>
+                    </svg>
+                    <div class="service-detail">
+                        <h3>100% اورجینال</h3>
+                        <h6 class="text-content">100% ضمانت بازگشت وجه</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Service Section End -->
+
+<!-- Footer Start -->
+{% render_partial 'home_module.views.footer' %}
+<!-- Footer End -->
+
+<!-- Quick View Modal Box Start -->
+<div class="modal fade theme-modal view-modal" id="view" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-sm-4 g-2">
+                    <div class="col-lg-6">
+                        <div class="slider-image">
+                            <img src="/static/Front/images/product/category/1.jpg" class="img-fluid blur-up lazyload"
+                                 alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="right-sidebar-modal">
+                            <h4 class="title-name">کیک خامه ای سفید رنگ با روکش قرم 500 گرمی</h4>
+                            <h4 class="price">36.000 تومان</h4>
+                            <div class="product-rating">
+                                <ul class="rating">
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star"></i>
+                                    </li>
+                                </ul>
+                                <span class="ms-2">8 بازخورد</span>
+                                <span class="ms-2 text-danger">6 عدد در 16 ساعت گذشته فروخته شد</span>
+                            </div>
+
+                            <div class="product-detail">
+                                <h4>جزئیات محصول :</h4>
+                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
+                                    گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
+                                    برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
+                                    می باشد.</p>
+                            </div>
+
+                            <ul class="brand-list">
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>نام برند :</h5>
+                                        <h6>جنگل سیاه</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>کد محصول :</h5>
+                                        <h6>W0690034</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>نوع محصول :</h5>
+                                        <h6>کیک خامه ای سفید</h6>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="select-size">
+                                <h4>اندازه کیک :</h4>
+                                <select class="form-select select-form-size">
+                                    <option selected>انتخاب وزن</option>
+                                    <option value="1.2">1/2 کیلوگرم</option>
+                                    <option value="0">1 کیلوگرم</option>
+                                    <option value="1.5">1/5 کیلوگرم</option>
+                                    <option value="red">با رز های قرمز</option>
+                                    <option value="pink">با رزهای صورتی</option>
+                                </select>
+                            </div>
+
+                            <div class="modal-button">
+                                <button onclick="location.href = 'cart.html';"
+                                        class="btn btn-md add-cart-button icon">افزودن به سبد خرید
+                                </button>
+                                <button onclick="location.href = 'product-left.html';"
+                                        class="btn theme-bg-color view-button icon text-white fw-bold btn-md">
+                                    نمایش جزئیات بیشتر
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick View Modal Box End -->
+
+<!-- Cookie Bar Box Start -->
+<div class="cookie-bar-box">
+    <div class="cookie-box">
+        <div class="cookie-image">
+            <img src="/static/Front/images/cookie-bar.png" class="blur-up lazyload" alt="">
+            <h2>کوکی !</h2>
+        </div>
+
+        <div class="cookie-contain">
+            <h5 class="text-content">ما از کوکی ها استفاده می کنیم تا تجربه شما را بهبود ببخشیم.</h5>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button class="btn privacy-button">حریم خصوصی</button>
+        <button class="btn ok-button">پذیرفتن</button>
+    </div>
+</div>
+<!-- Cookie Bar Box End -->
+
+<!-- Location Modal Start -->
+<div class="modal location-modal fade theme-modal" id="locationModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">آدرس خود را انتخاب کنید</h5>
+                <p class="mt-1 text-content">آدرس خود را وارد کنید تا ما پیشنهاد را برای منطقه شما مشخص می کنیم.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="location-list">
+                    <div class="search-input">
+                        <input type="search" class="form-control" placeholder="محل خود را جستجو کنید">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <div class="disabled-box">
+                        <h6>انتخاب مکان شما</h6>
+                    </div>
+
+                    <ul class="location-select custom-height">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>آلاباما</h6>
+                                <span>حداقل: 100 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>آریزوانا</h6>
+                                <span>حداقل: 150 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>کالیفرنیا</h6>
+                                <span>حداقل: 170 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>ایران</h6>
+                                <span>حداقل: 150 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>فلوریدا</h6>
+                                <span>حداقل: 160 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>جورجیا</h6>
+                                <span>حداقل: 110 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>کانزاس</h6>
+                                <span>حداقل: 130 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>مینه سوتا</h6>
+                                <span>حداقل: 140 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>نیویورک</h6>
+                                <span>حداقل: 120 تومان</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>واشنگتن</h6>
+                                <span>حداقل: 160 تومان</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Location Modal End -->
+
+<!-- Tap to top start -->
+<div class="theme-option">
+    <div class="setting-box">
+        <button class="btn setting-button">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+
+        <div class="theme-setting-2">
+            <div class="theme-box">
+                <ul>
+                    <li>
+                        <div class="setting-name">
+                            <h4>رنگ</h4>
+                        </div>
+                        <div class="theme-setting-button color-picker">
+                            <form class="form-control">
+                                <label for="colorPick" class="form-label mb-0">رنگ قالب</label>
+                                <input type="color" class="form-control form-control-color" id="colorPick"
+                                       value="#0da487" title="Choose your color">
+                            </form>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="setting-name">
+                            <h4>حالت</h4>
+                        </div>
+                        <div class="theme-setting-button">
+                            <button class="btn btn-2 outline" id="darkButton">تیره</button>
+                            <button class="btn btn-2 unline" id="lightButton">روشن</button>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="setting-name">
+                            <h4>نوع</h4>
+                        </div>
+                        <div class="theme-setting-button rtl">
+                            <button class="btn btn-2 rtl-unline">چپ چین</button>
+                            <button class="btn btn-2 rtl-outline">راست چین</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top">
+        <a id="back-to-top" href="#">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+</div>
+<!-- Tap to top end -->
+
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+
+<!-- latest jquery-->
+<script src="/static/Front/js/jquery-3.6.0.min.js"></script>
+
+<!-- jquery ui-->
+<script src="/static/Front/js/jquery-ui.min.js"></script>
+
+<!-- Bootstrap js-->
+<script src="/static/Front/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/static/Front/js/bootstrap/bootstrap-notify.min.js"></script>
+<script src="/static/Front/js/bootstrap/popper.min.js"></script>
+
+<!-- feather icon js-->
+<script src="/static/Front/js/feather/feather.min.js"></script>
+<script src="/static/Front/js/feather/feather-icon.js"></script>
+
+<!-- Lazyload Js -->
+<script src="/static/Front/js/lazysizes.min.js"></script>
+
+<!-- Slick js-->
+<script src="/static/Front/js/slick/slick.js"></script>
+<script src="/static/Front/js/slick/slick-animation.min.js"></script>
+<script src="/static/Front/js/custom-slick-animated.js"></script>
+<script src="/static/Front/js/slick/custom_slick.js"></script>
+
+<!-- Range slider js -->
+<script src="/static/Front/js/ion.rangeSlider.min.js"></script>
+
+<!-- Auto Height Js -->
+<script src="/static/Front/js/auto-height.js"></script>
+
+<!-- Lazyload Js -->
+<script src="/static/Front/js/lazysizes.min.js"></script>
+
+<!-- Quantity js -->
+<script src="/static/Front/js/quantity-2.js"></script>
+
+<!-- Fly Cart Js -->
+<script src="/static/Front/js/fly-cart.js"></script>
+
+<!-- Timer Js -->
+<script src="/static/Front/js/timer2.js"></script>
+<script src="/static/Front/js/timer1.js"></script>
+
+<!-- Copy clipboard Js -->
+<script src="/static/Front/js/clipboard.min.js"></script>
+<script src="/static/Front/js/copy-clipboard.js"></script>
+
+<!-- WOW js -->
+<script src="/static/Front/js/wow.min.js"></script>
+<script src="/static/Front/js/custom-wow.js"></script>
+
+<!-- script js -->
+<script src="/static/Front/js/script.js"></script>
+
+<!-- thme setting js -->
+<script src="/static/Front/js/theme-setting.js"></script>
+</body>
+
+</html>

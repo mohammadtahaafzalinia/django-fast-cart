@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load poll_extras %}
+{% block title_page %}
+مقایسه
+{% endblock %}
+{% block continer_page %}
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2 class="mb-2">مقایسه محصولات</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{% url 'main_product' %}">فروشگاه</a></li>
+                                <li class="breadcrumb-item active">مقایسه محصولات</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Compare Section Start -->
+    <section class="compare-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table compare-table">
+
+                            <tbody>
+                                <tr>
+                                    <th>محصول</th>
+                                    {% for product in products %}
+                                    <td>
+                                        <a class="text-title" href="{% url 'ditail_product' product.slug %}">{{ product.product_name }}</a>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+
+                                <tr>
+                                    <th>تصاویر</th>
+                                    {% for product in products %}
+                                    <td>
+                                        <a href="{% url 'ditail_product' product.slug %}" class="compare-image">
+                                           {% thumbnail product.image '411x607' crop='center' as im  %}
+                                                <img src="{{ product.image.url }}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                           {% endthumbnail %}
+
+
+                                        </a>
+                                    </td>
+                                    {% endfor %}
+
+
+                                </tr>
+
+
+                                <tr>
+                                    <th>نوع محصول</th>
+                                    {% for product in products %}
+                                        <td class="text-content">{{ product.category }}</td>
+                                    {% endfor %}
+
+
+                                </tr>
+
+                                <tr>
+                                    <th>قیمت</th>
+                                    {% for product in products %}
+                                    	<td class="price text-content">{{ product.price_after_discount }} تومان</td>
+                                    {% endfor %}
+
+
+                                </tr>
+
+                                <tr>
+                                    <th>در دسترس بودن</th>
+                                    {% for product in products %}
+                                        {% if product.is_active %}
+                                    	    <td class="text-content">موجود در انبار</td>
+                                        {% else %}
+                                            <td class="text-content">ناموجود در انبار</td>
+                                        {% endif %}
+
+                                    {% endfor %}
+
+
+
+                                </tr>
+
+                                <tr>
+                                    <th>امتیاز</th>
+                                    {% for product in products %}
+
+
+                                    <td>
+                                        <div class="compare-rating">
+                                            <ul class="rating">
+                                                {% for item in product.score|rangeInt %}
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <span class="text-content">({{ product.id|comments }} رای)</span>
+                                        </div>
+                                    {% endfor %}
+                                </td>
+                                </tr>
+
+                                <tr>
+                                    <th>وزن</th>
+                                    {% for product in products %}
+                                    <td class="text-content">{{ product.weight }}</td>
+                                    {% endfor %}
+                                </tr>
+
+                                <tr>
+                                    <th>خرید</th>
+                                    {% for product in products %}
+                                    <td>
+                                        <button onclick="location.href = 'cart.html';"
+                                            class="btn btn-animation btn-sm w-100">افزودن به سبد خرید</button>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+
+                                <tr>
+                                    <th></th>
+                                    {% for product in products %}
+                                    <td>
+                                        <a onclick="CompareDelete({{ product.id }},{{ count }})">حذف</a>
+                                    </td>
+                                    {% endfor %}
+                                    <script>
+                                        function CompareDelete(Idproduct,Count) {
+                                            $.get('/product/delete/',{
+                                            'product_id':Idproduct,
+                                             }).then(
+                                                 res=>{
+                                                     location.reload()
+                                                 }
+                                            )
+                                        }
+                                        {% if slug %}
+                                        	location.href = '/product/compare/';
+                                        {% endif %}
+                                    </script>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Compare Section End -->
+    {% if warning == 'TCBIF' %}
+            <script>
+                     Swal.fire({
+                          title: "حداکثر چهار محصول را می توان با هم مقایسه کرد!",
+                          text: "برای اینکه بتوانید محصول جدیدی را به سبد مقایسه اضافه کنید باید حداقل یک محصول را حذف کنید",
+                          icon: "warning",
+                          confirmButtonText: "باشه"
+                        }).then(
+                            res=>{
+                                location.href = '/product/compare/';
+                                return res
+                            }
+                     );
+            </script>
+    {% endif %}
+{% endblock %}

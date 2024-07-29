@@ -1,0 +1,49 @@
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/IRANSansWeb\(FaNum\)_Light.eot');
+    src: url('../fonts/IRANSansWeb(FaNum)_Light.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+      url('../fonts/IRANSansWeb(FaNum)_Light.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+      url('../fonts/IRANSansWeb(FaNum)_Light.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+      url('../fonts/IRANSansWeb(FaNum)_Light.ttf') format('truetype');
+}
+
+body {
+    font-family: iransans;
+}
+.theme-invoice-1 .invoice-wrapper .invoice-body .top-sec .details-box .address-box ul {
+    padding-right: 0px;
+    padding-left: 40px;
+}
+.theme-invoice-2 .invoice-wrapper .invoice-header .header-contain .header-right h3 {
+    letter-spacing: 0px;
+}
+.text-start {
+    text-align: right !important;
+}
+.theme-invoice-2 .invoice-wrapper .invoice-body .table-borderless table tbody tr td .table-details
+, .theme-invoice-1 .invoice-wrapper .invoice-body .invoice-table-2 .table tbody tr td .item-detail {
+    padding-right: 0;
+    padding-left: 40px;
+}
+.theme-invoice-2 .invoice-wrapper .invoice-footer .button-group ul , .theme-invoice-2 .invoice-wrapper .invoice-body .top-sec .details-box .address-box ul
+, .theme-invoice-3 .invoice-wrapper .invoice-footer .button-group ul {
+    padding: 0;
+}
+.theme-invoice-2 .invoice-wrapper .invoice-header .header-contain .header-left {
+    background-image: url(../images/shape-1.png);
+}
+.theme-invoice-3 .invoice-wrapper .invoice-header .header-right {
+    margin-left: 28px;
+    margin-right: unset;
+}
+.theme-invoice-3 .invoice-wrapper .invoice-header .header-left {
+    padding: 24px 28px;
+    padding-top: 0;
+    padding-left: 0;
+}
+.rtl-padding {
+    padding-right: 10px;
+    padding-left: 40px;
+}

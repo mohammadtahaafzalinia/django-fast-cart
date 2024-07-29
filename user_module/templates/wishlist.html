@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title_page %}
+لیست علاقه مندی ها
+{% endblock %}
+{% block continer_page %}
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>لیست علاقه‌مندی‌ها</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">لیست علاقه‌مندی‌ها</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Wishlist Section Start -->
+    <section class="wishlist-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-3 g-2">
+                {% for favorite in favorites %}
+                <div class="col-xxl-2 col-lg-3 col-md-4 col-6 product-box-contain">
+                    <div class="product-box-3 h-100">
+                        <div class="product-header">
+                            <div class="product-image">
+                                {% thumbnail favorite.product.image '148x147' crop='center' quality=50 as im %}
+                                <a href="{% url 'ditail_product' favorite.product.slug %}">
+                                    <img src="{{ im.url }}" class="img-fluid blur-up lazyload"
+                                         alt="">
+                                </a>
+                                {% endthumbnail %}
+
+
+                                <div class="product-header-top">
+                                    <button onclick="Add({{ favorite.product.id }}),Delete({{ favorite.product.id }})" class="btn wishlist-button close_button">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-detail">
+                                <span class="span-name">{{ favorite.product.category.title }}</span>
+                                <a href="{% url 'ditail_product' favorite.product.slug %}">
+                                    <h5 class="name">{{ favorite.product.product_name }}</h5>
+                                </a>
+                                <h6 class="unit mt-1">{{ favorite.product.weight }}</h6>
+                                <h5 class="price">
+                                    <span class="theme-color">{{ favorite.product.price_after_discount }} تومان</span>
+                                    <del>{{ favorite.product.price }}</del>
+                                </h5>
+
+                                <div class="add-to-cart-box bg-white mt-2">
+                                    <button class="btn btn-add-cart addcart-button" onclick="AddProductBasketBuy({{ favorite.product.id }})">افزودن
+                                        <span class="add-icon bg-light-gray"> <i class="fa-solid fa-plus"></i> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Wishlist Section End -->
+{% endblock %}

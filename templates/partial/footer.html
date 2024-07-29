@@ -1,0 +1,209 @@
+<footer class="section-t-space">
+    <div class="container-fluid-lg">
+        <div class="service-section">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="service-contain">
+                        <div class="service-box">
+                            <div class="service-image">
+                                <img src="/static/Front/svg/product.svg" class="blur-up lazyload" alt="">
+                            </div>
+
+                            <div class="service-detail">
+                                <h5>محصولات تازه و اورگانیک</h5>
+                            </div>
+                        </div>
+
+                        <div class="service-box">
+                            <div class="service-image">
+                                <img src="/static/Front/svg/delivery.svg" class="blur-up lazyload" alt="">
+                            </div>
+
+                            <div class="service-detail">
+                                <h5>ارسال رایگان برای خرید بالای 500 تومان</h5>
+                            </div>
+                        </div>
+
+                        <div class="service-box">
+                            <div class="service-image">
+                                <img src="/static/Front/svg/discount.svg" class="blur-up lazyload" alt="">
+                            </div>
+
+                            <div class="service-detail">
+                                <h5>تخفیف های ویژه روزانه</h5>
+                            </div>
+                        </div>
+
+                        <div class="service-box">
+                            <div class="service-image">
+                                <img src="/static/Front/svg/market.svg" class="blur-up lazyload" alt="">
+                            </div>
+
+                            <div class="service-detail">
+                                <h5>بهترین قیمت در سراسر وب</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-footer section-b-space section-t-space">
+            <div class="row g-md-4 g-3">
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="footer-logo">
+                        <div class="theme-logo">
+                            <a href="{% url 'home' %}">
+                                <img src="{{ sites.icon.url }}" class="blur-up lazyload" alt="">
+                            </a>
+                        </div>
+
+                        <div class="footer-logo-contain">
+                            <p>{{ sites.description }}</p>
+
+                            <ul class="address">
+                                <li>
+                                    <i data-feather="home"></i>
+                                    <a href="{% url 'home' %}">{{ sites.address }}</a>
+                                </li>
+                                <li>
+                                    <i data-feather="mail"></i>
+                                    <a href="{% url 'home' %}">{{ sites.email }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4>دسته بندی</h4>
+                    </div>
+
+                    <div class="footer-contain">
+                        <ul>
+                            {% for category in categorys %}
+                                <li>
+                                    <a href="{% url 'main_product' %}?category={{ category.id }}" class="text-content">{{ category.title }}</a>
+                                </li>                            	
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xl col-lg-2 col-sm-3">
+                    <div class="footer-title">
+                        <h4>دسترسی سریع</h4>
+                    </div>
+
+                    <div class="footer-contain">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}" class="text-content">خانه</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'main_product' %}" class="text-content">فروشگاه</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'about-us' %}" class="text-content">درباره ما</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog-grid' %}" class="text-content">وبلاگ</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'contact-us' %}" class="text-content">تماس با ما</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-sm-3">
+                    <div class="footer-title">
+                        <h4>لینک های مهم</h4>
+                    </div>
+
+                    <div class="footer-contain">
+                        <ul>
+                            <li>
+                                <a href="{% url 'user-dashboard' %}" class="text-content">حساب کاربری</a>
+                            </li>
+{#                            <li>#}
+{#                                <a href="../../order_success_module/templates/order-tracking.html" class="text-content">پیگیری سفارش</a>#}
+{#                            </li>#}
+                            <li>
+                                <a href="{% url 'favorites' %}" class="text-content">لیست علاقه‌مندی</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'search_product' %}" class="text-content">جستجو</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4>تماس با ما</h4>
+                    </div>
+
+                    <div class="footer-contact">
+                        <ul>
+                            <li>
+                                <div class="footer-number">
+                                    <i data-feather="phone"></i>
+                                    <div class="contact-number">
+                                        <h6 class="text-content">پشتیبانی 24 ساعته :</h6>
+                                        <h5>{{ sites.phone }}</h5>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="footer-number">
+                                    <i data-feather="mail"></i>
+                                    <div class="contact-number">
+                                        <h6 class="text-content">آدرس ایمیل :</h6>
+                                        <h5>{{ sites.email }}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-footer section-small-space">
+            <div class="reserve">
+                <h6 class="text-content"> بک اند ساخته شده توسط   <a href="{{ sites.link }}">محمد طاها افضلی نیا</a> </h6>
+            </div>
+            
+
+            <div class="social-link">
+                <h6 class="text-content">شبکه های اجتماعی :</h6>
+                <ul>
+                    <li>
+                        <a href="{{ sites.facebook }}" target="_blank">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ sites.twitter }}" target="_blank">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ sites.instagram }}" target="_blank">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ sites.pinterest }}" target="_blank">
+                            <i class="fa-brands fa-pinterest-p"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

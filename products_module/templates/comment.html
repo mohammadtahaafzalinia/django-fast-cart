@@ -1,0 +1,48 @@
+{% load thumbnail %}
+{% load poll_extras %}
+{% for comment in comments %}
+	                                                                <li>
+                                                                <div class="people-box">
+                                                                    <div>
+                                                                        <div class="people-image">
+                                                                              {% thumbnail comment.user.avatar "70x70" quality=50 crop='center' as im %}
+                                                                                 <img src="{{ im.url }}"
+                                                                                      class="img-fluid blur-up lazyload"
+                                                                                      alt="">
+                                                                              {% endthumbnail %}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="people-comment">
+                                                                        <a class="name" href="javascript:void(0)">{{ comment.user.username }}</a>
+                                                                        <div class="date-time">
+                                                                            <h6 class="text-content">{{ comment.date|jalaliDate }} در {{ comment.date|jalaliTime }} </h6>
+                                                                            <div class="product-rating">
+                                                                                <ul class="rating">
+                                                                                    <li>
+                                                                                        <i data-feather="star" class="fill"></i>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <i data-feather="star" class="fill"></i>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <i data-feather="star" class="fill"></i>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <i data-feather="star"></i>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <i data-feather="star"></i>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="reply">
+                                                                            <p>{{ comment.text }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+{% endfor %}

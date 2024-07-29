@@ -1,0 +1,501 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title_page %}
+جزئیات بلاگ
+{% endblock %}
+{% block continer_page %}
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>برگه جزئیات وبلاگ</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">وبلاگ</li>
+                                <li class="breadcrumb-item active" aria-current="page">جزئیات وبلاگ</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Blog Details Section Start -->
+    <section class="blog-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-4 g-3">
+                <div class="col-xxl-3 col-xl-4 col-lg-5">
+                    <div class="left-sidebar-box">
+                        <div class="left-search-box">
+                            <div class="search-box">
+                                <input type="search" class="form-control" id="exampleFormControlInput4"
+                                    placeholder="جستجو ...">
+                            </div>
+                        </div>
+
+                        <div class="accordion left-accordion-box" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        پست های اخیر
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body pt-0">
+                                        <div class="recent-post-box">
+                                            <div class="recent-box">
+                                                <a href="blog-detail.html" class="recent-image">
+                                                    <img src="/static/Front/images/inner-page/blog/1.jpg"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </a>
+
+                                                <div class="recent-detail">
+                                                    <a href="blog-detail.html">
+                                                        <h5 class="recent-name">چاقوی پیاز سبز و سالاد قرار داده شده است</h5>
+                                                    </a>
+                                                    <h6>25 اردیبهشت 1400 <i data-feather="thumbs-up"></i></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="recent-box">
+                                                <a href="blog-detail.html" class="recent-image">
+                                                    <img src="/static/Front/images/inner-page/blog/2.jpg"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </a>
+
+                                                <div class="recent-detail">
+                                                    <a href="blog-detail.html">
+                                                        <h5 class="recent-name">سلامتی و پوست برای ارگانیک شما</h5>
+                                                    </a>
+                                                    <h6>25 اردیبهشت 1400 <i data-feather="thumbs-up"></i></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="recent-box">
+                                                <a href="blog-detail.html" class="recent-image">
+                                                    <img src="/static/Front/images/inner-page/blog/3.jpg"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </a>
+
+                                                <div class="recent-detail">
+                                                    <a href="blog-detail.html">
+                                                        <h5 class="recent-name">ترکیبات ارگانیک ماسالا تازه و نرم</h5>
+                                                    </a>
+                                                    <h6>25 اردیبهشت 1400 <i data-feather="thumbs-up"></i></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="recent-box">
+                                                <a href="blog-detail.html" class="recent-image">
+                                                    <img src="/static/Front/images/inner-page/blog/4.jpg"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </a>
+
+                                                <div class="recent-detail">
+                                                    <a href="blog-detail.html">
+                                                        <h5 class="recent-name">برند ارگانیک تازه و پیک نیک</h5>
+                                                    </a>
+                                                    <h6>25 اردیبهشت 1400 <i data-feather="thumbs-up"></i></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo">
+                                        دسته بندی
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingTwo">
+                                    <div class="accordion-body p-0">
+                                        <div class="category-list-box">
+                                            <ul>
+                                                <li>
+                                                    <a href="blog-list.html">
+                                                        <div class="category-name">
+                                                            <h5>آخرین دستور العمل ها</h5>
+                                                            <span>10</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="blog-list.html">
+                                                        <div class="category-name">
+                                                            <h5>غذای رژیمی</h5>
+                                                            <span>6</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="blog-list.html">
+                                                        <div class="category-name">
+                                                            <h5>اقلام کم کالری</h5>
+                                                            <span>8</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="blog-list.html">
+                                                        <div class="category-name">
+                                                            <h5>روش پختن</h5>
+                                                            <span>9</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="blog-list.html">
+                                                        <div class="category-name">
+                                                            <h5>لبنیات رایگان</h5>
+                                                            <span>12</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="blog-list.html">
+                                                        <div class="category-name">
+                                                            <h5>غذای گیاهی</h5>
+                                                            <span>10</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseThree">
+                                        برچسب محصولات
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingThree">
+                                    <div class="accordion-body pt-0">
+                                        <div class="product-tags-box">
+                                            <ul>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">میوه و سبزیجات</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">گوشت</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">اورگانیک</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">کیک</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">میوه استوایی</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">کیک سفید</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">غذای ارگانیک</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="javascript:void(0)">گرانترین میوه</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseFour">
+                                        محصولات پرطرفدار
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse collapse show"
+                                    aria-labelledby="panelsStayOpen-headingFour">
+                                    <div class="accordion-body">
+                                        <ul class="product-list product-list-2 border-0 p-0">
+                                            <li>
+                                                <div class="offer-product">
+                                                    <a href="shop-left-sidebar.html" class="offer-image">
+                                                        <img src="/static/Front/images/vegetable/product/23.png"
+                                                            class="blur-up lazyload" alt="">
+                                                    </a>
+
+                                                    <div class="offer-detail">
+                                                        <div>
+                                                            <a href="shop-left-sidebar.html">
+                                                                <h6 class="name">پودر قهوه استرالیایی 50 گرمی</h6>
+                                                            </a>
+                                                            <span>450 گرم</span>
+                                                            <h6 class="price theme-color">70.000 تومان</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <div class="offer-product">
+                                                    <a href="shop-left-sidebar.html" class="offer-image">
+                                                        <img src="/static/Front/images/vegetable/product/24.png"
+                                                            class="blur-up lazyload" alt="">
+                                                    </a>
+
+                                                    <div class="offer-detail">
+                                                        <div>
+                                                            <a href="shop-left-sidebar.html">
+                                                                <h6 class="name">فندق با تریکب نمکی برای حیوانات</h6>
+                                                            </a>
+                                                            <span>450 گرم</span>
+                                                            <h6 class="price theme-color">40.000 تومان</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <li class="mb-0">
+                                                <div class="offer-product">
+                                                    <a href="shop-left-sidebar.html" class="offer-image">
+                                                        <img src="/static/Front/images/vegetable/product/26.png"
+                                                            class="blur-up lazyload" alt="">
+                                                    </a>
+
+                                                    <div class="offer-detail">
+                                                        <div>
+                                                            <a href="shop-left-sidebar.html">
+                                                                <h6 class="name">سیب قرمز پرو پلاس</h6>
+                                                            </a>
+                                                            <span>1 کیلو گرم</span>
+                                                            <h6 class="price theme-color">80.000 تومان</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-9 col-xl-8 col-lg-7 ratio_50">
+                    <div class="blog-detail-image rounded-3 mb-4">
+                        {% thumbnail blogs.image '450x300' crop='center' as im %}
+                            <img src="{{ im.url }}" class="bg-img blur-up lazyload" alt="">
+                        {% endthumbnail %}
+                        
+                        <div class="blog-image-contain">
+                            <ul class="contain-list">
+                                <li>{{ blogs.category }}</li>
+                                {% for blog_tage in blogs.tage.all %}
+                                    <li>{{ blog_tage }}</li>
+                                {% endfor %}
+                            </ul>
+                            <h2>{{ blogs.name_blog }}</h2>
+                            <ul class="contain-comment-list">
+                                <li>
+                                    <div class="user-list">
+                                        <i data-feather="user"></i>
+                                        <span>{{ blogs.author }}</span>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="user-list">
+                                        <i data-feather="calendar"></i>
+                                        <span>{{ blogs.get_jalali_data }}</span>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="user-list">
+                                        <i data-feather="message-square"></i>
+                                        <span>82 دیدگاه</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="blog-detail-contain">
+                        <p><span class="first"></span>
+                            {{ blogs.description }}
+                        </p>
+                        <div class="blog-details-quote">
+                            <h3>{{ blogs.quote }}</h3>
+                            <h5>- {{ blogs.author_quote }}</h5>
+                        </div>
+                        {% for more in mores %}
+                            {% if more.blog_id == blogs.id %}
+                                <p>
+                                    {{ more.description }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+
+
+
+                    <div class="comment-box overflow-hidden">
+                        <div class="leave-title">
+                            <h3>دیدگاه ها</h3>
+                        </div>
+
+                        <div class="user-comment-box">
+                            <ul>
+                                <li>
+                                    <div class="user-box border-color">
+                                        <div class="reply-button">
+                                            <i class="fa-solid fa-reply"></i>
+                                            <span class="theme-color">پاسخ</span>
+                                        </div>
+                                        <div class="user-iamge">
+                                            <img src="/static/Front/images/inner-page/user/1.jpg"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>30 فروردین 1401</h6>
+                                                <h5 class="text-content">امین احمدی</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain">
+                                            <p>"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است."</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="user-box border-color">
+                                        <div class="reply-button">
+                                            <i class="fa-solid fa-reply"></i>
+                                            <span class="theme-color">پاسخ</span>
+                                        </div>
+                                        <div class="user-iamge">
+                                            <img src="/static/Front/images/inner-page/user/2.jpg"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>30 فروردین 1401</h6>
+                                                <h5 class="text-content">امین احمدی</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain">
+                                            <p>"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"</p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="li-padding">
+                                    <div class="user-box">
+                                        <div class="reply-button">
+                                            <i class="fa-solid fa-reply"></i>
+                                            <span class="theme-color">پاسخ</span>
+                                        </div>
+                                        <div class="user-iamge">
+                                            <img src="/static/Front/images/inner-page/user/3.jpg"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>30 فروردین 1401</h6>
+                                                <h5 class="text-content">امین احمدی</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain">
+                                            <p>"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="leave-box">
+                        <div class="leave-title mt-0">
+                            <h3>ارسال دیدگاه</h3>
+                        </div>
+
+                        <div class="leave-comment">
+                            <div class="comment-notes">
+                                <p class="text-content mb-4">آدرس ایمیل شما منتشر نخواهد شد!</p>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                    <div class="blog-input">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="نام شما">
+                                    </div>
+                                </div>
+
+                                <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                    <div class="blog-input">
+                                        <input type="email" class="form-control" id="exampleFormControlInput2"
+                                            placeholder="آدرس ایمیل">
+                                    </div>
+                                </div>
+
+                                <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                    <div class="blog-input">
+                                        <input type="url" class="form-control" id="exampleFormControlInput3"
+                                            placeholder="آدرس وبسایت">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="blog-input">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                            placeholder="دیدگاه شما"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-check d-flex mt-4 p-0">
+                                <input class="checkbox_animated" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label text-content" for="flexCheckDefault">
+                                    <span class="color color-1"> نام و ایمیل من را برای دفعات بعدی ذخیره کن!</span>
+                                </label>
+                            </div>
+
+                            <button class="btn btn-animation ms-xxl-auto mt-xxl-0 mt-3 btn-md fw-bold">ارسال دیدگاه</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+{% endblock %}
